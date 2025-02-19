@@ -1,7 +1,6 @@
 // db.js
-const DB_NAME = 'SolidDB';
-const STORE_NAME = 'habits';
-const DB_VERSION = 1;
+const DB_NAME = 'HabitTracker';
+const DB_VERSION = 2;
 
 export async function openDB() {
   return new Promise((resolve, reject) => {
@@ -9,8 +8,14 @@ export async function openDB() {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, {
+      if (!db.objectStoreNames.contains('habits')) {
+        db.createObjectStore('habits', {
+          keyPath: 'id',
+          autoIncrement: true
+        });
+      }
+      if (!db.objectStoreNames.contains('checks')) {
+        db.createObjectStore('checks', {
           keyPath: 'id',
           autoIncrement: true
         });
@@ -22,10 +27,10 @@ export async function openDB() {
   });
 }
 
-export async function getAllHabits(db) {
+export async function getAll(db, table) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(STORE_NAME, 'readonly');
-    const store = transaction.objectStore(STORE_NAME);
+    const transaction = db.transaction(table, 'readonly');
+    const store = transaction.objectStore(table);
     const request = store.getAll();
 
     request.onsuccess = () => resolve(request.result);
@@ -33,22 +38,22 @@ export async function getAllHabits(db) {
   });
 }
 
-export async function addHabit(db, habit) {
+export async function add(db, table, data) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(STORE_NAME, 'readwrite');
-    const store = transaction.objectStore(STORE_NAME);
-    const request = store.add(habit);
+    const transaction = db.transaction(table, 'readwrite');
+    const store = transaction.objectStore(table);
+    const request = store.add(data);
 
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
   });
 }
 
-export async function removeHabit(db, habit_id) {
+export async function remove(db, table, id) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(STORE_NAME, 'readwrite');
-    const store = transaction.objectStore(STORE_NAME);
-    const request = store.delete(habit_id);
+    const transaction = db.transaction(table, 'readwrite');
+    const store = transaction.objectStore(table);
+    const request = store.delete(id);
 
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);

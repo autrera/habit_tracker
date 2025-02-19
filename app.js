@@ -1,30 +1,36 @@
 // app.js
 import { createSignal, onMount } from "https://esm.sh/solid-js@1.8.1";
-import { openDB, getAllHabits, addHabit, removeHabit } from './db.js';
+import { openDB, getAll, add, remove } from './db.js';
 import html from "https://esm.sh/solid-js@1.8.1/html";
+import Habit from './habit.js';
 
 export default function App() {
   const [habits, setHabits] = createSignal([]);
+  const [checks, setChecks] = createSignal([]);
   const [db, setDb] = createSignal(null);
   const [newHabit, setNewHabit] = createSignal('');
 
   onMount(async () => {
-    console.log("OnMount");
     const database = await openDB();
     setDb(database);
     refreshHabits(database);
+    refreshChecks(database);
   });
 
   const refreshHabits = async (database) => {
-    const items = await getAllHabits(database);
+    const items = await getAll(database, 'habits');
     setHabits(items);
-    console.log('Habits', items);
+  };
+
+  const refreshChecks = async (database) => {
+    const items = await getAll(database, 'checks');
+    setChecks(items);
   };
 
   const handleAddHabit = async () => {
     if (!newHabit().trim() || !db()) return;
     
-    await addHabit(db(), {
+    await add(db(), 'habits', {
       title: newHabit(),
       completed: false
     });
@@ -34,8 +40,16 @@ export default function App() {
   };
 
   const handleRemoveHabit = async (id) => {
-    await removeHabit(db(), id);
+    await remove(db(), 'habits', id);
     refreshHabits(db());
+  };
+
+  const handleAddCheck = async (date, habit_id) => {
+    await add(db(), 'checks', {
+      date: date,
+      habit_id: habit_id,
+      active: true
+    });
   };
 
   return html`
@@ -54,7 +68,14 @@ export default function App() {
 
       <ul>
         ${() => habits().map(habit => (
-          html`<li>${habit.title}<a onClick=${() => handleRemoveHabit(habit.id)}>[ X ]</a></li>`
+          html`
+            <${Habit} 
+              data=${() => habit} 
+              checks=${() => checks} 
+              onRemove=${handleRemoveHabit}
+              onCheck=${handleAddCheck}
+            />
+          `
         ))}
       </ul>
     </div>
