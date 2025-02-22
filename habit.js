@@ -16,11 +16,19 @@ export default function Habit(props) {
     setChecks(checksDates);
   });
 
+  const handleCheck = (event, date, habit_id) => {
+    if (event.target.checked) {
+      props.onCheck(date, habit_id);
+    } else {
+      props.onUncheck(date, habit_id);
+    }
+  }
+
   return html`
     <li>
       ${props.data.title}<a onClick=${() => props.onRemove(props.data.id)}>[ X ]</a>
       ${() => dateRange.map(date => (
-        html`<input type="checkbox" value=${date} checked=${checks().includes(date)} onClick=${() => props.onCheck(date, props.data.id)} />`
+        html`<input type="checkbox" value=${date} checked=${checks().includes(date)} onClick=${(e) => handleCheck(e, date, props.data.id) } />`
       ))}
     </li>
   `

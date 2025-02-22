@@ -1,6 +1,6 @@
 // app.js
 import { createSignal, onMount } from "https://esm.sh/solid-js@1.8.1";
-import { openDB, getAll, add, remove } from './db.js';
+import { openDB, getAll, add, remove, getByIndex } from './db.js';
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import Habit from './habit.js';
 
@@ -52,6 +52,11 @@ export default function App() {
     });
   };
 
+  const handleRemoveCheck = async (date, habit_id) => {
+    const results = await getByIndex(db(), 'checks', 'checks_habit_id_date_index', [habit_id, date]);
+    await remove(db(), 'checks', results[0].id);
+  };
+
   return html`
     <div>
       <h1>IndexedDB Habit List</h1>
@@ -74,6 +79,7 @@ export default function App() {
               checks=${() => checks} 
               onRemove=${handleRemoveHabit}
               onCheck=${handleAddCheck}
+              onUncheck=${handleRemoveCheck}
             />
           `
         ))}

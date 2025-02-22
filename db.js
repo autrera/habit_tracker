@@ -1,6 +1,6 @@
 // db.js
 const DB_NAME = 'HabitTracker';
-const DB_VERSION = 2;
+const DB_VERSION = 1;
 
 export async function openDB() {
   return new Promise((resolve, reject) => {
@@ -15,10 +15,11 @@ export async function openDB() {
         });
       }
       if (!db.objectStoreNames.contains('checks')) {
-        db.createObjectStore('checks', {
+        const store = db.createObjectStore('checks', {
           keyPath: 'id',
           autoIncrement: true
         });
+        store.createIndex('checks_habit_id_date_index', ['habit_id','date'], { unique: true });
       }
     };
 
@@ -34,6 +35,27 @@ export async function getAll(db, table) {
     const request = store.getAll();
 
     request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export async function getByIndex(db, table, indexName, properties) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(table, 'readonly');
+    const store = transaction.objectStore(table);
+    const index = store.index(indexName);
+    const request = index.openCursor(IDBKeyRange.only(properties));
+    const results = [];
+
+    request.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor) {
+        results.push(cursor.value);
+        cursor.continue();
+      } else {
+        resolve(results);
+      }
+    };
     request.onerror = () => reject(request.error);
   });
 }
