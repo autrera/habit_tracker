@@ -58,8 +58,10 @@ export default function App() {
   };
 
   return html`
-    <div>
-      <h1>IndexedDB Habit List</h1>
+    <div class="app">
+      <h1 class="app__title">
+        Habit Tracker
+      </h1>
       
       <input
         type="text"
@@ -71,19 +73,17 @@ export default function App() {
       />
       <button onClick=${handleAddHabit}>Add</button>
 
-      <ul>
-        ${() => habits().map(habit => (
-          html`
-            <${Habit} 
-              data=${() => habit} 
-              checks=${() => checks} 
-              onRemove=${handleRemoveHabit}
-              onCheck=${handleAddCheck}
-              onUncheck=${handleRemoveCheck}
-            />
-          `
-        ))}
-      </ul>
+      ${() => habits().map(habit => (
+        html`
+          <${Habit} 
+            data=${() => habit} 
+            checks=${() => checks} 
+            onRemove=${handleRemoveHabit}
+            onCheck=${handleAddCheck}
+            onUncheck=${handleRemoveCheck}
+          />
+        `
+      ))}
     </div>
   `;
 }
