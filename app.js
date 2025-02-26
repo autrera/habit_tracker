@@ -3,6 +3,7 @@ import { createSignal, onMount } from "https://esm.sh/solid-js@1.8.1";
 import { openDB, getAll, add, remove, getByIndex } from './db.js';
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import Habit from './habit.js';
+import HabitMonthly from './habitMonthly.js';
 
 export default function App() {
   const [habits, setHabits] = createSignal([]);
@@ -58,24 +59,37 @@ export default function App() {
   };
 
   return html`
-    <div class="app">
-      <h1 class="app__title">
-        Habit Tracker
-      </h1>
-      
-      <input
-        type="text"
-        value=${() => newHabit()}
-        onInput=${(e) => {
-	    setNewHabit(e.currentTarget.value)
-	}}
-        placeholder="Add new habit"
-      />
-      <button onClick=${handleAddHabit}>Add</button>
+    <h1 class="app__title">
+      Habit Tracker
+    </h1>
+    
+    <input
+      type="text"
+      value=${() => newHabit()}
+      onInput=${(e) => {
+          setNewHabit(e.currentTarget.value)
+      }}
+      placeholder="Add new habit"
+    />
+    <button onClick=${handleAddHabit}>Add</button>
 
+    <div class="app__habits">
       ${() => habits().map(habit => (
         html`
           <${Habit} 
+            data=${() => habit} 
+            checks=${() => checks} 
+            onRemove=${handleRemoveHabit}
+            onCheck=${handleAddCheck}
+            onUncheck=${handleRemoveCheck}
+          />
+        `
+      ))}
+    </div>
+    <div class="app__habits">
+      ${() => habits().map(habit => (
+        html`
+          <${HabitMonthly} 
             data=${() => habit} 
             checks=${() => checks} 
             onRemove=${handleRemoveHabit}

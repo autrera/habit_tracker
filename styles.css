@@ -2,6 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+* {
+  box-sizing: border-box;
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -15,41 +18,45 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote, q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-.app {
+.w-100 {
+  width: 100% !important;
+}
+
+#app {
   min-height: 100vh;
   background: #111;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .app__title {
@@ -57,20 +64,55 @@ table {
   color: white;
 }
 
+.app__habits {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.habit-monthly,
 .habit {
   background: black;
   border: 1px solid #333;
-  margin-top: 1rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
 }
 
+.habit {
+  flex: 1 0 auto;
+  margin: 1rem 0.5rem 0;
+}
+
+.habit-monthly__wrapper {
+  margin: 1rem 0 0 0;
+  flex: 0 0 auto;
+  width: 33.33333333%;
+}
+
+.habit-monthly {
+  margin: 0.5rem;
+}
+
+.habit-monthly__name,
 .habit__name {
   color: white;
   margin-bottom: 0.5rem;
 }
 
+.habit-monthly__days {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 120px;
+}
+
+.habit-monthly__days input[type=checkbox],
 .habit__days input[type=checkbox] {
   margin-right: 0.75rem;
   transform: scale(1.5);
+}
+
+.habit-monthly__days input[type=checkbox] {
+  flex: 1 0 auto;
+  margin: 1px 0;
+  transform: none;
 }
