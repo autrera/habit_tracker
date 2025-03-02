@@ -62,8 +62,9 @@ export default function App() {
     <h1 class="app__title">
       Habit Tracker
     </h1>
-    
+
     <input
+      class="app__input"
       type="text"
       value=${() => newHabit()}
       onInput=${(e) => {
