@@ -1,9 +1,10 @@
 import { createSignal, createEffect } from "https://esm.sh/solid-js@1.8.1";
 import html from "https://esm.sh/solid-js@1.8.1/html";
-import { getDateRange } from './utilities.js';
+import { getDateRange, groupDatesByWeek } from './utilities.js';
 
 export default function HabitMonthly(props) {
   const dateRange = getDateRange(35).reverse(); 
+  const dateMap = groupDatesByWeek(dateRange); 
   const [checks, setChecks] = createSignal([]);
 
   createEffect(() => {
@@ -14,7 +15,7 @@ export default function HabitMonthly(props) {
       }
     });
     setChecks(checksDates);
-  });
+  }, [props.checks]);
 
   const handleCheck = (event, date, habit_id) => {
     if (event.target.checked) {
@@ -31,9 +32,21 @@ export default function HabitMonthly(props) {
           ${props.data.title}<a onClick=${() => props.onRemove(props.data.id)}>[ X ]</a>
         </div>
         <div class="habit-monthly__days">
-          ${() => dateRange.map(date => (
-            html`<input type="checkbox" value=${date} checked=${checks().includes(date)} onClick=${(e) => handleCheck(e, date, props.data.id) } />`
+          <table>
+          ${() => dateMap.map(group => (
+            html`
+            <tr>
+              ${() => group.map(date => (
+                html`
+                  <td style="width: 10px">
+                    <input type="checkbox" value=${date} checked=${checks().includes(date)} onClick=${(e) => handleCheck(e, date, props.data.id) } />
+                  </td>
+                `
+              ))}
+            </tr>
+            `
           ))}
+          </table>
         </div>
       </div>
     </div>

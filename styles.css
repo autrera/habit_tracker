@@ -56,7 +56,20 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 120px;
+}
+
+.habit-monthly__days table {
+  border-collapse: collapse;
+}
+
+.habit-monthly__days tr {
+  height: 10px;
+  line-height: 10px;
+}
+
+.habit-monthly__days td {
+  width: 10px;
+  padding: 0;
 }
 
 .habit-monthly__days input[type=checkbox],
@@ -67,6 +80,6 @@
 
 .habit-monthly__days input[type=checkbox] {
   flex: 1 0 auto;
-  margin: 1px 0;
+  margin: 0;
   transform: none;
 }
