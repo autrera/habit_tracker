@@ -4,6 +4,7 @@ import { openDB, getAll, add, remove, getByIndex } from './db.js';
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import Habit from './habit.js';
 import HabitMonthly from './habitMonthly.js';
+import HabitYearly from './habitYearly.js';
 
 export default function App() {
   const [habits, setHabits] = createSignal([]);
@@ -91,6 +92,19 @@ export default function App() {
       ${() => habits().map(habit => (
         html`
           <${HabitMonthly} 
+            data=${() => habit} 
+            checks=${() => checks} 
+            onRemove=${handleRemoveHabit}
+            onCheck=${handleAddCheck}
+            onUncheck=${handleRemoveCheck}
+          />
+        `
+      ))}
+    </div>
+    <div class="app__habits">
+      ${() => habits().map(habit => (
+        html`
+          <${HabitYearly} 
             data=${() => habit} 
             checks=${() => checks} 
             onRemove=${handleRemoveHabit}
