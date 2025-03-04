@@ -118,6 +118,7 @@ html {
 }
 
 .habitCheck {
+  cursor: pointer;
 }
 
 .habitCheck span {

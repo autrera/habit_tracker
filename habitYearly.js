@@ -18,14 +18,6 @@ export default function HabitYearly(props) {
     setChecks(checksDates);
   }, [props.checks]);
 
-  const handleCheck = (event, date, habit_id) => {
-    if (event.target.checked) {
-      props.onCheck(date, habit_id);
-    } else {
-      props.onUncheck(date, habit_id);
-    }
-  }
-
   return html`
     <div class="habit-yearly__wrapper">
       <div class="habit-yearly">
@@ -40,7 +32,11 @@ export default function HabitYearly(props) {
               ${() => group.map(date => (
                 html`
                   <td>
-                    <${HabitCheck} checked=${checks().includes(date)} />
+                    <${HabitCheck}
+                      checked=${checks().includes(date)}
+                      onCheck=${() => props.onCheck(date, props.data.id)}
+                      onUncheck=${() => props.onUncheck(date, props.data.id)}
+                    />
                   </td>
                 `
               ))}
