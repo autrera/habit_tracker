@@ -85,7 +85,7 @@ html {
 .habit-monthly__days table {
   border-collapse: separate;
   width: max-content;
-  border-spacing: 1px;
+  border-spacing: 2px;
   overflow: hidden;
   position: relative;
 }
@@ -128,10 +128,10 @@ html {
 }
 
 .habitCheck .checked {
-  background: white;
+  background: #66FF00;
 }
 
 .habitCheck .unchecked {
-  background: grey;
+  background: #1B4D3E;
 }
 
