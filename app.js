@@ -78,32 +78,6 @@ export default function App() {
     <div class="app__habits">
       ${() => habits().map(habit => (
         html`
-          <${Habit} 
-            data=${() => habit} 
-            checks=${() => checks} 
-            onRemove=${handleRemoveHabit}
-            onCheck=${handleAddCheck}
-            onUncheck=${handleRemoveCheck}
-          />
-        `
-      ))}
-    </div>
-    <div class="app__habits">
-      ${() => habits().map(habit => (
-        html`
-          <${HabitMonthly} 
-            data=${() => habit} 
-            checks=${() => checks} 
-            onRemove=${handleRemoveHabit}
-            onCheck=${handleAddCheck}
-            onUncheck=${handleRemoveCheck}
-          />
-        `
-      ))}
-    </div>
-    <div class="app__habits">
-      ${() => habits().map(habit => (
-        html`
           <${HabitYearly} 
             data=${() => habit} 
             checks=${() => checks} 

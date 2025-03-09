@@ -9,6 +9,14 @@ export default function HabitYearly(props) {
   const [checks, setChecks] = createSignal([]);
 
   createEffect(() => {
+    const elements = document.getElementsByClassName("habit-yearly__days");
+    console.log(elements);
+    for (let element of elements) {
+      element.scrollLeft = element.scrollWidth;
+    }
+  }, []);
+
+  createEffect(() => {
     const checksDates = [];
     props.checks().forEach(check => {
       if(check.habit_id == props.data.id) {

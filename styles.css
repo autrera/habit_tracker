@@ -69,7 +69,6 @@ html {
   margin-bottom: 0.5rem;
 }
 
-.habit-yearly__days,
 .habit-monthly__days {
   display: flex;
   flex-wrap: wrap;
