@@ -6,6 +6,10 @@
   width: 100% !important;
 }
 
+.pusher {
+  flex-grow: 1;
+}
+
 html {
   background: #111;
 }
@@ -69,6 +73,10 @@ html {
   margin-bottom: 0.5rem;
 }
 
+.habit-yearly__name {
+  display: flex;
+}
+
 .habit-monthly__days {
   display: flex;
   flex-wrap: wrap;
@@ -116,22 +124,43 @@ html {
   transform: none;
 }
 
-.habitCheck {
+.habit-check {
   cursor: pointer;
 }
 
-.habitCheck span {
+.habit-check span {
   display: inline-block;
   width: 10px;
   max-width: 10px;
   height: 10px;
+  border-radius: 2px;
 }
 
-.habitCheck .checked {
+.habit-check .checked {
   background: #66FF00;
 }
 
-.habitCheck .unchecked {
+.habit-check .unchecked {
+  background: #1B4D3E;
+}
+
+.daily-check {
+  cursor: pointer;
+}
+
+.daily-check span {
+  display: inline-block;
+  width: 20px;
+  max-width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.daily-check .checked {
+  background: #66FF00;
+}
+
+.daily-check .unchecked {
   background: #1B4D3E;
 }
 

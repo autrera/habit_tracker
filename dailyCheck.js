@@ -1,8 +1,12 @@
 import { createSignal, createEffect, Switch, Match } from "https://esm.sh/solid-js@1.8.1";
 import html from "https://esm.sh/solid-js@1.8.1/html";
 
-export default function HabitCheck(props) {
+export default function DailyCheck(props) {
   const [check, setCheck] = createSignal(props.checked);
+
+  createEffect(() => {
+    console.log(props);
+  }, [props.checks]);
 
   const handleCheck = () => {
     if (check()) {
@@ -14,7 +18,7 @@ export default function HabitCheck(props) {
   }
 
   return html`
-    <div class="habit-check" onClick=${() => handleCheck()}>
+    <div class="daily-check" onClick=${() => handleCheck()}>
       <${Switch}>
         ${() => (
           html`

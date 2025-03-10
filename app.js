@@ -52,11 +52,13 @@ export default function App() {
       habit_id: habit_id,
       active: true
     });
+    refreshChecks(db());
   };
 
   const handleRemoveCheck = async (date, habit_id) => {
     const results = await getByIndex(db(), 'checks', 'checks_habit_id_date_index', [habit_id, date]);
     await remove(db(), 'checks', results[0].id);
+    refreshChecks(db());
   };
 
   return html`
