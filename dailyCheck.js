@@ -4,10 +4,6 @@ import html from "https://esm.sh/solid-js@1.8.1/html";
 export default function DailyCheck(props) {
   const [check, setCheck] = createSignal(props.checked);
 
-  createEffect(() => {
-    console.log(props);
-  }, [props.checks]);
-
   const handleCheck = () => {
     if (check()) {
       props.onUncheck;

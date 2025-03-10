@@ -1,16 +1,18 @@
 // app.js
-import { createSignal, onMount } from "https://esm.sh/solid-js@1.8.1";
+import { createSignal, onMount, Switch, Match } from "https://esm.sh/solid-js@1.8.1";
 import { openDB, getAll, add, remove, getByIndex } from './db.js';
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import Habit from './habit.js';
 import HabitMonthly from './habitMonthly.js';
 import HabitYearly from './habitYearly.js';
+import Drawer from './drawer.js';
 
 export default function App() {
   const [habits, setHabits] = createSignal([]);
   const [checks, setChecks] = createSignal([]);
   const [db, setDb] = createSignal(null);
   const [newHabit, setNewHabit] = createSignal('');
+  const [showCreateHabit, setShowCreateHabit] = createSignal(false);
 
   onMount(async () => {
     const database = await openDB();
@@ -39,6 +41,7 @@ export default function App() {
     
     setNewHabit('');
     refreshHabits(db());
+    setShowCreateHabit(false);
   };
 
   const handleRemoveHabit = async (id) => {
@@ -62,20 +65,13 @@ export default function App() {
   };
 
   return html`
-    <h1 class="app__title">
-      Habit Tracker
-    </h1>
-
-    <input
-      class="app__input"
-      type="text"
-      value=${() => newHabit()}
-      onInput=${(e) => {
-          setNewHabit(e.currentTarget.value)
-      }}
-      placeholder="Add new habit"
-    />
-    <button onClick=${handleAddHabit}>Add</button>
+    <div class="app__header">
+      <h1 class="app__title">
+        Habit Tracker
+      </h1>
+      <div class="pusher">&nbsp;</div>
+      <span class="app__new-habit-launcher" onClick=${() => setShowCreateHabit(true)}>+</span>
+    </div>
 
     <div class="app__habits">
       ${() => habits().map(habit => (
@@ -89,6 +85,38 @@ export default function App() {
           />
         `
       ))}
+
+      <${Switch}>
+        ${() => (
+          html`
+            <${Match} when=${showCreateHabit() == true}>
+              <${Drawer}
+                onClose=${() => setShowCreateHabit(false)}
+              >
+                <div class="new-habit-form">
+                  <input
+                    class="app__input"
+                    type="text"
+                    value=${() => newHabit()}
+                    onInput=${(e) => {
+                        setNewHabit(e.currentTarget.value)
+                    }}
+                    placeholder="Add new habit"
+                  />
+                  <button onClick=${handleAddHabit}>Add</button>
+                </div>
+              <//>
+            <//>
+          `
+        )}
+        ${() => (
+          html`
+            <${Match} when=${showCreateHabit() == false}>
+              <div></div>
+            <//>
+          `
+        )}
+      <//>
     </div>
   `;
 }

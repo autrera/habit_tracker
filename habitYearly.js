@@ -24,7 +24,6 @@ export default function HabitYearly(props) {
         checksDates.push(check.date);
       }
     });
-    console.log(checksDates);
     setChecks(checksDates);
   }, [props.checks]);
 
