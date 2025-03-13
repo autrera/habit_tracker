@@ -94,7 +94,9 @@ export default function App() {
                 onClose=${() => setShowCreateHabit(false)}
               >
                 <div class="new-habit-form">
+                  <label for="new-habit-form__name">Name</label>
                   <input
+                    id="new-habit-form__name"
                     class="app__input"
                     type="text"
                     value=${() => newHabit()}
@@ -102,6 +104,17 @@ export default function App() {
                         setNewHabit(e.currentTarget.value)
                     }}
                     placeholder="Add new habit"
+                  />
+                  <label for="new-habit-form__color">Color</label>
+                  <input
+                    id="new-habit-form__color"
+                    class="app__input"
+                    type="text"
+                    value=${() => newHabit()}
+                    onInput=${(e) => {
+                        setNewHabit(e.currentTarget.value)
+                    }}
+                    placeholder="Add new habit color"
                   />
                   <button onClick=${handleAddHabit}>Add</button>
                 </div>
