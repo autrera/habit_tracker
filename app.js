@@ -33,12 +33,12 @@ export default function App() {
 
   const handleAddHabit = async () => {
     if (!newHabit().trim() || !db()) return;
-    
+
     await add(db(), 'habits', {
       title: newHabit(),
       completed: false
     });
-    
+
     setNewHabit('');
     refreshHabits(db());
     setShowCreateHabit(false);
@@ -73,12 +73,19 @@ export default function App() {
       <span class="app__new-habit-launcher" onClick=${() => setShowCreateHabit(true)}>+</span>
     </div>
 
+    ${() => {
+      if (habits().length == 0) {
+        return html`
+          <h1 style='text-align: center'>No habits found. Let's add some!</h1>
+        `
+      }
+    }}
     <div class="app__habits">
       ${() => habits().map(habit => (
         html`
-          <${HabitYearly} 
-            data=${() => habit} 
-            checks=${() => checks} 
+          <${HabitYearly}
+            data=${() => habit}
+            checks=${() => checks}
             onRemove=${handleRemoveHabit}
             onCheck=${handleAddCheck}
             onUncheck=${handleRemoveCheck}
