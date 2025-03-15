@@ -182,7 +182,8 @@ html {
 }
 
 .habit-check .unchecked {
-  background: #1B4D3E;
+  background: #343a40;
+  opacity: 0.15;
 }
 
 .daily-check {
@@ -202,9 +203,14 @@ html {
 }
 
 .daily-check .unchecked {
-  background: #1B4D3E;
+  background: #343a40;
+  opacity: 0.15;
 }
 
 .new-habit-form {
   padding: 1rem;
+}
+
+.new-habit-form label {
+  display: block;
 }

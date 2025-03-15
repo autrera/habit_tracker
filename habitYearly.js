@@ -6,8 +6,8 @@ import DailyCheck from '/dailyCheck.js';
 
 export default function HabitYearly(props) {
   const today = getToday();
-  const dateRange = getDateRange(371).reverse(); 
-  const dateMap = groupDatesByWeek(dateRange); 
+  const dateRange = getDateRange(371).reverse();
+  const dateMap = groupDatesByWeek(dateRange);
   const [checks, setChecks] = createSignal([]);
 
   createEffect(() => {
@@ -34,10 +34,11 @@ export default function HabitYearly(props) {
           ${props.data.title}
           <a onClick=${() => props.onRemove(props.data.id)}>[ X ]</a>
           <div class="pusher">&nbsp;</div>
-          ${() => 
+          ${() =>
             html`
-              <${DailyCheck} 
+              <${DailyCheck}
                 today=${today}
+                color=${() => props.data.color}
                 checks=${checks()}
                 checked=${checks().includes(today)}
                 onCheck=${() => props.onCheck(today, props.data.id)}
@@ -55,6 +56,7 @@ export default function HabitYearly(props) {
                 html`
                   <td>
                     <${HabitCheck}
+                      color=${() => props.data.color}
                       checked=${checks().includes(date)}
                       onCheck=${() => props.onCheck(date, props.data.id)}
                       onUncheck=${() => props.onUncheck(date, props.data.id)}

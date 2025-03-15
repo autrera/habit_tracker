@@ -17,16 +17,16 @@ export default function HabitCheck(props) {
     <div class="habit-check" onClick=${() => handleCheck()}>
       <${Switch}>
         ${() => (
-          html`
+      html`
             <${Match} when=${check() == true}>
-              <span class="checked">&nbsp;</span>
+              <span class="checked" style=${"background: " + props.color}>&nbsp;</span>
             <//>
           `
         )}
         ${() => (
           html`
             <${Match} when=${check() == false}>
-              <span class="unchecked">&nbsp;</span>
+              <span class="unchecked" style=${"background: " + props.color}>&nbsp;</span>
             <//>
           `
         )}

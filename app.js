@@ -11,7 +11,8 @@ export default function App() {
   const [habits, setHabits] = createSignal([]);
   const [checks, setChecks] = createSignal([]);
   const [db, setDb] = createSignal(null);
-  const [newHabit, setNewHabit] = createSignal('');
+  const [newHabitTitle, setNewHabitTitle] = createSignal('');
+  const [newHabitColor, setNewHabitColor] = createSignal('');
   const [showCreateHabit, setShowCreateHabit] = createSignal(false);
 
   onMount(async () => {
@@ -32,14 +33,16 @@ export default function App() {
   };
 
   const handleAddHabit = async () => {
-    if (!newHabit().trim() || !db()) return;
+    if (!newHabitTitle().trim() || !db()) return;
 
     await add(db(), 'habits', {
-      title: newHabit(),
+      title: newHabitTitle(),
+      color: newHabitColor(),
       completed: false
     });
 
-    setNewHabit('');
+    setNewHabitTitle('');
+    setNewHabitColor('');
     refreshHabits(db());
     setShowCreateHabit(false);
   };
@@ -101,28 +104,34 @@ export default function App() {
                 onClose=${() => setShowCreateHabit(false)}
               >
                 <div class="new-habit-form">
-                  <label for="new-habit-form__name">Name</label>
-                  <input
-                    id="new-habit-form__name"
-                    class="app__input"
-                    type="text"
-                    value=${() => newHabit()}
-                    onInput=${(e) => {
-                        setNewHabit(e.currentTarget.value)
-                    }}
-                    placeholder="Add new habit"
-                  />
-                  <label for="new-habit-form__color">Color</label>
-                  <input
-                    id="new-habit-form__color"
-                    class="app__input"
-                    type="text"
-                    value=${() => newHabit()}
-                    onInput=${(e) => {
-                        setNewHabit(e.currentTarget.value)
-                    }}
-                    placeholder="Add new habit color"
-                  />
+                  <div class="new-habit-form__input">
+                    <label for="new-habit-form__name">Name</label>
+                    <input
+                      id="new-habit-form__name"
+                      class="app__input"
+                      type="text"
+                      value=${() => newHabitTitle()}
+                      onInput=${(e) => {
+                          setNewHabitTitle(e.currentTarget.value)
+                      }}
+                      placeholder="Add new habit"
+                    />
+                  </div>
+                  <div class="new-habit-form__input">
+                    <label for="new-habit-form__color">Color</label>
+                    <input
+                      id="new-habit-form__color"
+                      class="app__input"
+                      type="text"
+                      value=${() => newHabitColor()}
+                      onInput=${(e) => {
+                          setNewHabitColor(e.currentTarget.value)
+                      }}
+                      placeholder="Add new habit color"
+                    />
+                  </div>
+                  <button onClick=${() => setShowCreateHabit(false)}>Close</button>
+                  &nbsp;
                   <button onClick=${handleAddHabit}>Add</button>
                 </div>
               <//>
