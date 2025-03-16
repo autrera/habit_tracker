@@ -130,9 +130,11 @@ export default function App() {
                       placeholder="Add new habit color"
                     />
                   </div>
-                  <button onClick=${() => setShowCreateHabit(false)}>Close</button>
-                  &nbsp;
-                  <button onClick=${handleAddHabit}>Add</button>
+                  <div style="text-align: right">
+                    <button onClick=${() => setShowCreateHabit(false)}>Close</button>
+                    &nbsp;
+                    <button onClick=${handleAddHabit}>Add</button>
+                  </div>
                 </div>
               <//>
             <//>
