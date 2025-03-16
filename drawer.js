@@ -4,7 +4,7 @@ import html from "https://esm.sh/solid-js@1.8.1/html";
 export default function Drawer(props) {
 
   createEffect(() => {
-    props.onOpen();
+    props.onOpen;
   });
 
   return html`

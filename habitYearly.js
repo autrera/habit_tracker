@@ -56,6 +56,7 @@ export default function HabitYearly(props) {
                 html`
                   <td>
                     <${HabitCheck}
+                      date=${date}
                       color=${() => props.data.color}
                       checked=${checks().includes(date)}
                       onCheck=${() => props.onCheck(date, props.data.id)}
