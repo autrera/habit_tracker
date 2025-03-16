@@ -1,13 +1,13 @@
 import { createSignal, createEffect } from "https://esm.sh/solid-js@1.8.1";
 import html from "https://esm.sh/solid-js@1.8.1/html";
-import { getDateRange, groupDatesByWeek, getToday } from './utilities.js';
+import { getDateRange, groupDatesForYearly, getToday } from './utilities.js';
 import HabitCheck from '/habitCheck.js';
 import DailyCheck from '/dailyCheck.js';
 
 export default function HabitYearly(props) {
   const today = getToday();
   const dateRange = getDateRange(371).reverse();
-  const dateMap = groupDatesByWeek(dateRange);
+  const dateMap = groupDatesForYearly(dateRange, 7);
   const [checks, setChecks] = createSignal([]);
 
   createEffect(() => {

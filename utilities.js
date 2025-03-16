@@ -16,14 +16,36 @@ export function getDateRange(maxDays) {
   return dates;
 }
 
-export function groupDatesByWeek(days) {
-  const groupedDates = [[], [], [], [], [], [], []];
+export function groupDatesForYearly(days, groupBy) {
+  const groupedDates = [];
+  for (let i = 0; i < groupBy; i++) {
+    groupedDates.push([]);
+  }
+
   let group = 0;
   days.map(date => {
     groupedDates[group].push(date);
     group++;
-    if (group == 7) {
+    if (group == groupBy) {
       group = 0;
+    }
+  });
+
+  return groupedDates;
+}
+
+export function groupDatesForDisplay(days, groupBy) {
+  const groupedDates = [[]];
+
+  let group = 0;
+  let counter = 0;
+  days.map(date => {
+    groupedDates[group].push(date);
+    counter++;
+    if (counter == groupBy) {
+      group++;
+      counter = 0;
+      groupedDates[group] = [];
     }
   });
 

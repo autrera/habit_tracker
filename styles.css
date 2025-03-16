@@ -151,7 +151,8 @@ html {
   margin-bottom: 0.5rem;
 }
 
-.habit-yearly__name {
+.habit-yearly__name,
+.habit-monthly__name {
   display: flex;
 }
 

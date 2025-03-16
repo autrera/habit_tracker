@@ -3,6 +3,10 @@ import html from "https://esm.sh/solid-js@1.8.1/html";
 
 export default function Drawer(props) {
 
+  createEffect(() => {
+    props.onOpen();
+  });
+
   return html`
     <div class="drawer">
       <div class="drawer__backdrop" onClick=${() => props.onClose()}>
