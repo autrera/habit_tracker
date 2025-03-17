@@ -19,6 +19,7 @@ export default function App() {
   const [newHabitTitle, setNewHabitTitle] = createSignal("");
   const [newHabitColor, setNewHabitColor] = createSignal("");
   const [showCreateHabit, setShowCreateHabit] = createSignal(false);
+  const [currentView, setCurrentView] = createSignal("yearly");
 
   onMount(async () => {
     const database = await openDB();
@@ -81,11 +82,8 @@ export default function App() {
     <div class="app__header">
       <h1 class="app__title">Habit Tracker</h1>
       <div class="pusher">&nbsp;</div>
-      <span
-        class="app__new-habit-launcher"
-        onClick=${() => setShowCreateHabit(true)}
-        >+</span
-      >
+      <span class="app__new-habit-launcher" onClick=${() => setShowCreateHabit(true)}>+</span>
+      <span onClick=${() => setShowCreateHabit(true)} style="margin: 18px 4px; cursor: pointer;">New habit</span>
     </div>
 
     ${() => {
@@ -93,38 +91,54 @@ export default function App() {
         return html`
           <h1 style="text-align: center">No habits found. Let's add some!</h1>
         `;
+      } else {
+        return html`
+          <div class="view-switcher">
+            <button onClick=${() => setCurrentView("yearly")}>Yearly</button>
+            <button onClick=${() => setCurrentView("monthly")}>Monthly</button>
+          </div>
+        `;
       }
     }}
 
-    <div class="app__habits">
-      ${() =>
-        habits().map(
-          (habit) => html`
-            <${HabitYearly}
-              data=${() => habit}
-              checks=${() => checks}
-              onRemove=${handleRemoveHabit}
-              onCheck=${handleAddCheck}
-              onUncheck=${handleRemoveCheck}
-            />
-          `,
-        )}
-    </div>
-
-    <div class="app__habits">
-      ${() =>
-        habits().map(
-          (habit) => html`
-            <${HabitMonthly}
-              data=${() => habit}
-              checks=${() => checks}
-              onRemove=${handleRemoveHabit}
-              onCheck=${handleAddCheck}
-              onUncheck=${handleRemoveCheck}
-            />
-          `,
-        )}
-    </div>
+    <${Switch}>
+      ${() => html`
+        <${Match} when=${currentView() == "yearly"}>
+          <div class="app__habits">
+            ${() =>
+              habits().map(
+                (habit) => html`
+                  <${HabitYearly}
+                    data=${() => habit}
+                    checks=${() => checks}
+                    onRemove=${handleRemoveHabit}
+                    onCheck=${handleAddCheck}
+                    onUncheck=${handleRemoveCheck}
+                  />
+                `,
+              )}
+          </div>
+        <//>
+      `}
+      ${() => html`
+        <${Match} when=${currentView() == "monthly"}>
+          <div class="app__habits">
+            ${() =>
+              habits().map(
+                (habit) => html`
+                  <${HabitMonthly}
+                    data=${() => habit}
+                    checks=${() => checks}
+                    onRemove=${handleRemoveHabit}
+                    onCheck=${handleAddCheck}
+                    onUncheck=${handleRemoveCheck}
+                  />
+                `,
+              )}
+          </div>
+        <//>
+      `}
+    <//>
 
     <${Switch}>
       ${() => html`

@@ -101,7 +101,7 @@ html {
   background: #1B4D3E;
   border-radius: 100%;
   line-height: 1rem;
-  margin: 17px 0;
+  margin: 16px 0;
   border: 2px solid;
 }
 
@@ -253,4 +253,8 @@ html {
 
 .new-habit-form label {
   display: block;
+}
+
+.view-switcher {
+  margin: 0 0.5rem;
 }
