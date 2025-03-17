@@ -1,64 +1,79 @@
 * {
-  box-sizing: border-box;
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    box-sizing: border-box;
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        "Noto Sans",
+        "Liberation Sans",
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji";
 }
 
 .w-100 {
-  width: 100% !important;
+    width: 100% !important;
 }
 
 .pusher {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .drawer {
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .drawer__backdrop {
-  flex-grow: 1;
-  background: #111;
-  opacity: 0.7;
+    flex-grow: 1;
+    background: #111;
+    opacity: 0.7;
 }
 
 .drawer__content {
-  background: #111;
-  border-left: 1px solid #333;
+    background: #111;
+    border-left: 1px solid #333;
 }
 
 label {
     margin-bottom: 0.5rem;
 }
 
-input[type=text] {
-  display: block;
-  width: 100%;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #dee2e6;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #212529;
-  background-clip: padding-box;
-  border: 1px solid #495057;
-  border-radius: 0.375rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+input[type="text"] {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #dee2e6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #212529;
+    background-clip: padding-box;
+    border: 1px solid #495057;
+    border-radius: 0.375rem;
+    transition:
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
 }
 
-input[type=text]:focus {
-  color: #dee2e6;
-  background-color: #212529;
-  border-color: #86b7fe;
-  outline: 0;
-  box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+input[type="text"]:focus {
+    color: #dee2e6;
+    background-color: #212529;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
 button {
@@ -68,193 +83,193 @@ button {
 }
 
 button.primary {
-    background: #66FF00;
+    background: #66ff00;
 }
 
 html {
-  color: white;
-  font-size: 16px;
-  background: #111;
+    color: white;
+    font-size: 16px;
+    background: #111;
 }
 
 #app {
-  min-height: 100vh;
-  padding: 0.5rem;
-  max-width: 960px;
-  margin: 0 auto;
+    min-height: 100vh;
+    padding: 0.5rem;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .app__header {
-  margin: 0 0.5rem;
-  display: flex;
+    margin: 0 0.5rem;
+    display: flex;
 }
 
 .app__title {
-  font-size: 1.5rem;
-  color: white;
+    font-size: 1.5rem;
+    color: white;
 }
 
 .app__new-habit-launcher {
-  cursor: pointer;
-  color: #66FF00;
-  font-size: 36px;
-  background: #1B4D3E;
-  border-radius: 100%;
-  line-height: 1rem;
-  margin: 16px 0;
-  border: 2px solid;
+    cursor: pointer;
+    color: #66ff00;
+    font-size: 36px;
+    background: #1b4d3e;
+    border-radius: 100%;
+    line-height: 20px;
+    border: 2px solid;
+    align-self: center;
 }
 
 .app__input {
-  margin-bottom: 1rem;
-  padding: 0;
+    margin-bottom: 1rem;
+    padding: 0;
 }
 
 .app__habits {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .habit-yearly,
 .habit-monthly,
 .habit {
-  background: black;
-  border: 1px solid #333;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+    background: black;
+    border: 1px solid #333;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
 }
 
 .habit {
-  flex: 1 0 auto;
-  margin: 0.5rem;
+    flex: 1 0 auto;
+    margin: 0.5rem;
 }
 
 .habit-monthly__wrapper {
-  flex: 0 0 auto;
-  width: 33.33333333%;
+    flex: 0 0 auto;
+    width: 33.33333333%;
 }
 
 .habit-yearly__wrapper {
-  flex: 0 0 auto;
-  width: 100%;
+    flex: 0 0 auto;
+    width: 100%;
 }
 
 .habit-yearly,
 .habit-monthly {
-  margin: 0.5rem;
+    margin: 0.5rem;
 }
 
 .habit-yearly__name,
 .habit-monthly__name,
 .habit__name {
-  color: white;
-  margin-bottom: 0.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
 }
 
 .habit-yearly__name,
 .habit-monthly__name {
-  display: flex;
+    display: flex;
 }
 
 .habit-monthly__days {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .habit-yearly__days {
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .habit-yearly__days table,
 .habit-monthly__days table {
-  border-collapse: separate;
-  width: max-content;
-  border-spacing: 4px;
-  overflow: hidden;
-  position: relative;
-  margin: 0 auto;
+    border-collapse: separate;
+    width: max-content;
+    border-spacing: 4px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
 }
 
 .habit-yearly__days tr,
 .habit-monthly__days tr {
-  height: 12px;
-  line-height: 12px;
+    height: 12px;
+    line-height: 12px;
 }
 
 .habit-yearly__days td,
 .habit-monthly__days td {
-  width: 12px;
-  padding: 0;
+    width: 12px;
+    padding: 0;
 }
 
-.habit-yearly__days input[type=checkbox],
-.habit-monthly__days input[type=checkbox],
-.habit__days input[type=checkbox] {
-  margin-right: 0.75rem;
-  transform: scale(1.5);
+.habit-yearly__days input[type="checkbox"],
+.habit-monthly__days input[type="checkbox"],
+.habit__days input[type="checkbox"] {
+    margin-right: 0.75rem;
+    transform: scale(1.5);
 }
 
-.habit-yearly__days input[type=checkbox],
-.habit-monthly__days input[type=checkbox] {
-  flex: 1 0 auto;
-  margin: 0;
-  transform: none;
+.habit-yearly__days input[type="checkbox"],
+.habit-monthly__days input[type="checkbox"] {
+    flex: 1 0 auto;
+    margin: 0;
+    transform: none;
 }
 
 .habit-check {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .habit-check span {
-  display: inline-block;
-  width: 12px;
-  max-width: 12px;
-  height: 12px;
-  border-radius: 2px;
+    display: inline-block;
+    width: 12px;
+    max-width: 12px;
+    height: 12px;
+    border-radius: 2px;
 }
 
 .habit-check .checked {
-  background: #66FF00;
+    background: #66ff00;
 }
 
 .habit-check .unchecked {
-  background: #343a40;
-  opacity: 0.15;
+    background: #343a40;
+    opacity: 0.15;
 }
 
 .daily-check {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .daily-check span {
-  display: inline-block;
-  width: 20px;
-  max-width: 20px;
-  height: 20px;
-  border-radius: 4px;
+    display: inline-block;
+    width: 20px;
+    max-width: 20px;
+    height: 20px;
+    border-radius: 4px;
 }
 
 .daily-check .checked {
-  background: #66FF00;
+    background: #66ff00;
 }
 
 .daily-check .unchecked {
-  background: #343a40;
-  opacity: 0.15;
+    background: #343a40;
+    opacity: 0.15;
 }
 
 .new-habit-form {
-  width: 80vw;
-  padding: 1rem;
+    width: 80vw;
+    padding: 1rem;
 }
 
 .new-habit-form label {
-  display: block;
+    display: block;
 }
 
 .view-switcher {
-  margin: 0 0.5rem;
+    margin: 0 0.5rem;
 }

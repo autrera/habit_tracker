@@ -82,8 +82,16 @@ export default function App() {
     <div class="app__header">
       <h1 class="app__title">Habit Tracker</h1>
       <div class="pusher">&nbsp;</div>
-      <span class="app__new-habit-launcher" onClick=${() => setShowCreateHabit(true)}>+</span>
-      <span onClick=${() => setShowCreateHabit(true)} style="margin: 18px 4px; cursor: pointer;">New habit</span>
+      <span
+        class="app__new-habit-launcher"
+        onClick=${() => setShowCreateHabit(true)}
+        >+</span
+      >
+      <span
+        onClick=${() => setShowCreateHabit(true)}
+        style="align-self: center; margin-left: 4px; cursor: pointer;"
+        >New habit</span
+      >
     </div>
 
     ${() => {
@@ -144,9 +152,10 @@ export default function App() {
       ${() => html`
         <${Match} when=${showCreateHabit() == true}>
           <${Drawer}
-            onOpen=${() => document.getElementById("new-habit-form__name").focus()}
-            onClose=${() => setShowCreateHabit(false)
-          }>
+            onOpen=${() =>
+              document.getElementById("new-habit-form__name").focus()}
+            onClose=${() => setShowCreateHabit(false)}
+          >
             <div class="new-habit-form">
               <div class="new-habit-form__input">
                 <label for="new-habit-form__name">Name</label>
