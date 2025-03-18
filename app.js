@@ -26,6 +26,7 @@ export default function App() {
     setDb(database);
     refreshHabits(database);
     refreshChecks(database);
+    setEscapeListener();
   });
 
   const refreshHabits = async (database) => {
@@ -76,6 +77,15 @@ export default function App() {
     );
     await remove(db(), "checks", results[0].id);
     refreshChecks(db());
+  };
+
+  const setEscapeListener = () => {
+    document.onkeydown = function (evt) {
+      evt = evt || window.event;
+      if (evt.keyCode == 27) {
+        setShowCreateHabit(false);
+      }
+    };
   };
 
   return html`
