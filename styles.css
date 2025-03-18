@@ -132,21 +132,18 @@ html {
 
 .habit-yearly,
 .habit-monthly,
-.habit {
+.habit-weekly {
     background: black;
     border: 1px solid #333;
     padding: 0.5rem;
     border-radius: 0.25rem;
 }
 
-.habit {
-    flex: 1 0 auto;
-    margin: 0.5rem;
-}
-
+.habit-weekly__wrapper,
 .habit-monthly__wrapper {
     flex: 0 0 auto;
-    width: 33.33333333%;
+    width: 50%;
+    /* width: 33.33333333%; */
 }
 
 .habit-yearly__wrapper {
@@ -155,22 +152,25 @@ html {
 }
 
 .habit-yearly,
-.habit-monthly {
+.habit-monthly,
+.habit-weekly {
     margin: 0.5rem;
 }
 
 .habit-yearly__name,
 .habit-monthly__name,
-.habit__name {
+.habit-weekly__name {
     color: white;
     margin-bottom: 0.5rem;
 }
 
 .habit-yearly__name,
-.habit-monthly__name {
+.habit-monthly__name,
+.habit-weekly__name {
     display: flex;
 }
 
+.habit-weekly__days,
 .habit-monthly__days {
     display: flex;
     flex-wrap: wrap;
@@ -184,7 +184,8 @@ html {
 }
 
 .habit-yearly__days table,
-.habit-monthly__days table {
+.habit-monthly__days table,
+.habit-weekly__days table {
     border-collapse: separate;
     width: max-content;
     border-spacing: 4px;
@@ -193,27 +194,43 @@ html {
     margin: 0 auto;
 }
 
-.habit-yearly__days tr,
-.habit-monthly__days tr {
+.habit-monthly__days table,
+.habit-weekly__days table {
+    margin: 0.5rem auto;
+}
+
+.habit-yearly__days tr {
     height: 12px;
     line-height: 12px;
 }
 
-.habit-yearly__days td,
-.habit-monthly__days td {
+.habit-monthly__days tr,
+.habit-weekly__days tr {
+    height: 18px;
+    line-height: 18px;
+}
+
+.habit-yearly__days td {
     width: 12px;
+    padding: 0;
+}
+
+.habit-monthly__days td,
+.habit-weekly__days td {
+    width: 18px;
     padding: 0;
 }
 
 .habit-yearly__days input[type="checkbox"],
 .habit-monthly__days input[type="checkbox"],
-.habit__days input[type="checkbox"] {
+.habit-weekly__days input[type="checkbox"] {
     margin-right: 0.75rem;
     transform: scale(1.5);
 }
 
 .habit-yearly__days input[type="checkbox"],
-.habit-monthly__days input[type="checkbox"] {
+.habit-monthly__days input[type="checkbox"],
+.habit-weekly__days input[type="checkbox"] {
     flex: 1 0 auto;
     margin: 0;
     transform: none;
@@ -228,6 +245,15 @@ html {
     width: 12px;
     max-width: 12px;
     height: 12px;
+    border-radius: 2px;
+}
+
+.habit-monthly__days .habit-check span,
+.habit-weekly__days .habit-check span {
+    display: inline-block;
+    width: 18px;
+    max-width: 18px;
+    height: 18px;
     border-radius: 2px;
 }
 
@@ -271,5 +297,5 @@ html {
 }
 
 .view-switcher {
-    margin: 0 0.5rem;
+    margin: 0 0.5rem 0.5rem;
 }

@@ -7,7 +7,7 @@ import {
 } from "https://esm.sh/solid-js@1.8.1";
 import { openDB, getAll, add, remove, getByIndex } from "./db.js";
 import html from "https://esm.sh/solid-js@1.8.1/html";
-import Habit from "./habit.js";
+import HabitWeekly from "./habitWeekly.js";
 import HabitMonthly from "./habitMonthly.js";
 import HabitYearly from "./habitYearly.js";
 import Drawer from "./drawer.js";
@@ -114,6 +114,7 @@ export default function App() {
           <div class="view-switcher">
             <button onClick=${() => setCurrentView("yearly")}>Yearly</button>
             <button onClick=${() => setCurrentView("monthly")}>Monthly</button>
+            <button onClick=${() => setCurrentView("weekly")}>Weekly</button>
           </div>
         `;
       }
@@ -145,6 +146,24 @@ export default function App() {
               habits().map(
                 (habit) => html`
                   <${HabitMonthly}
+                    data=${() => habit}
+                    checks=${() => checks}
+                    onRemove=${handleRemoveHabit}
+                    onCheck=${handleAddCheck}
+                    onUncheck=${handleRemoveCheck}
+                  />
+                `,
+              )}
+          </div>
+        <//>
+      `}
+      ${() => html`
+        <${Match} when=${currentView() == "weekly"}>
+          <div class="app__habits">
+            ${() =>
+              habits().map(
+                (habit) => html`
+                  <${HabitWeekly}
                     data=${() => habit}
                     checks=${() => checks}
                     onRemove=${handleRemoveHabit}

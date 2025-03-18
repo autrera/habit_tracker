@@ -7,8 +7,8 @@ export function getDateRange(maxDays) {
     date.setDate(date.getDate() - i);
 
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
 
     dates.push(`${year}-${month}-${day}`);
   }
@@ -23,7 +23,7 @@ export function groupDatesForYearly(days, groupBy) {
   }
 
   let group = 0;
-  days.map(date => {
+  days.map((date) => {
     groupedDates[group].push(date);
     group++;
     if (group == groupBy) {
@@ -39,7 +39,7 @@ export function groupDatesForDisplay(days, groupBy) {
 
   let group = 0;
   let counter = 0;
-  days.map(date => {
+  days.map((date) => {
     groupedDates[group].push(date);
     counter++;
     if (counter == groupBy) {
@@ -48,15 +48,16 @@ export function groupDatesForDisplay(days, groupBy) {
       groupedDates[group] = [];
     }
   });
+  groupedDates.pop();
 
   return groupedDates;
 }
 
 export function getToday() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
 
-    return `${year}-${month}-${day}`;
+  return `${year}-${month}-${day}`;
 }
