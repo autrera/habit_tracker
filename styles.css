@@ -80,10 +80,15 @@ button {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+    background: none;
+    border: 1px solid #333;
+    color: #ccc;
+    border-radius: 6px;
 }
 
-button.primary {
+button.action {
     background: #66ff00;
+    color: #333;
 }
 
 html {
@@ -125,6 +130,7 @@ html {
 .app__habits {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 4rem;
 }
 
 .habit-yearly,
@@ -293,5 +299,24 @@ html {
 }
 
 .view-switcher {
-    margin: 0 0.5rem 0.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 1rem;
+}
+
+.view-switcher button {
+    border-radius: 0;
+}
+
+.view-switcher button:first-child {
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+}
+
+.view-switcher button:last-child {
+    border-radius: 0 6px 6px 0;
+    border-left: none;
 }

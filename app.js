@@ -243,7 +243,7 @@ export default function App() {
                   Close
                 </button>
                 &nbsp;
-                <button onClick=${handleAddHabit}>Add</button>
+                <button class="action" onClick=${handleAddHabit}>Add</button>
               </div>
             </div>
           <//>
