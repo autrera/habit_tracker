@@ -138,9 +138,24 @@ export default function App() {
       } else {
         return html`
           <div class="view-switcher">
-            <button onClick=${() => setCurrentView("yearly")}>Yearly</button>
-            <button onClick=${() => setCurrentView("monthly")}>Monthly</button>
-            <button onClick=${() => setCurrentView("weekly")}>Weekly</button>
+            <button
+              class=${() => (currentView() == "yearly" ? "active" : "")}
+              onClick=${() => setCurrentView("yearly")}
+            >
+              Yearly
+            </button>
+            <button
+              class=${() => (currentView() == "monthly" ? "active" : "")}
+              onClick=${() => setCurrentView("monthly")}
+            >
+              Monthly
+            </button>
+            <button
+              class=${() => (currentView() == "weekly" ? "active" : "")}
+              onClick=${() => setCurrentView("weekly")}
+            >
+              Weekly
+            </button>
           </div>
         `;
       }
