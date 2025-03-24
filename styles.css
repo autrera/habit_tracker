@@ -163,14 +163,43 @@ html {
 .habit-yearly__name,
 .habit-monthly__name,
 .habit-weekly__name {
-    color: white;
-    margin-bottom: 0.5rem;
+    color: #ccc;
+    display: flex;
 }
 
-.habit-yearly__name,
-.habit-monthly__name,
-.habit-weekly__name {
-    display: flex;
+.habit-menu {
+    position: relative;
+}
+
+.habit-menu__launcher {
+    color: #ccc;
+    width: 18px;
+    height: 18px;
+    margin: 0 0.5rem;
+    cursor: pointer;
+}
+
+.habit-menu__content {
+    position: absolute;
+    background: #ccc;
+    border-radius: 4px;
+    color: #333;
+    z-index: 99;
+    list-style-type: none;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.habit-menu__content li {
+    cursor: pointer;
+    padding: 0 0.5rem;
+}
+
+.habit-menu__content li.separator {
+    cursor: auto;
+    margin: 0.5rem 0;
+    height: 1px;
+    background: #999;
 }
 
 .habit-weekly__days,
