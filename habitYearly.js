@@ -34,11 +34,18 @@ export default function HabitYearly(props) {
         <div class="habit-yearly__name">
           <span>${props.data.title}</span>
           <${HabitMenu}>
-            <li>Edit</li>
+            <li onClick=${(event) => {}}>Edit</li>
             <li class="separator">&nbsp;</li>
-            <li>Archive</li>
+            <li
+              onClick=${(event) => {
+                if (confirm("Do you want to archive the habit?") == true) {
+                  props.onRemove(props.data.id);
+                }
+              }}
+            >
+              Archive
+            </li>
           <//>
-          <a onClick=${() => props.onRemove(props.data.id)}>[ X ]</a>
           <div class="pusher">&nbsp;</div>
           ${() => html`
             <${DailyCheck}

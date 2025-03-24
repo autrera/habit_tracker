@@ -187,12 +187,12 @@ html {
     z-index: 99;
     list-style-type: none;
     margin: 0;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
 }
 
 .habit-menu__content li {
     cursor: pointer;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
 }
 
 .habit-menu__content li.separator {

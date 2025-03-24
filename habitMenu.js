@@ -11,13 +11,14 @@ export default function HabitMenu(props) {
   const [show, setShow] = createSignal(false);
 
   createEffect(() => {
+    const rootElement = document.getElementById("app");
     const callback = () => {
       setShow(false);
     };
     if (show() == true) {
-      const event = document.addEventListener("click", callback);
+      const event = rootElement.addEventListener("click", callback);
     }
-    onCleanup(() => document.removeEventListener("click", callback));
+    onCleanup(() => rootElement.removeEventListener("click", callback));
   }, [show]);
 
   return html`
