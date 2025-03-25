@@ -141,37 +141,6 @@ export default function App() {
       >
     </div>
 
-    ${() => {
-      if (habits().length == 0) {
-        return html`
-          <h1 style="text-align: center">No habits found. Let's add some!</h1>
-        `;
-      } else {
-        return html`
-          <div class="view-switcher">
-            <button
-              class=${() => (currentView() == "yearly" ? "active" : "")}
-              onClick=${() => setCurrentView("yearly")}
-            >
-              Yearly
-            </button>
-            <button
-              class=${() => (currentView() == "monthly" ? "active" : "")}
-              onClick=${() => setCurrentView("monthly")}
-            >
-              Monthly
-            </button>
-            <button
-              class=${() => (currentView() == "weekly" ? "active" : "")}
-              onClick=${() => setCurrentView("weekly")}
-            >
-              Weekly
-            </button>
-          </div>
-        `;
-      }
-    }}
-
     <${Switch}>
       ${() => html`
         <${Match} when=${currentView() == "yearly"}>
@@ -276,5 +245,36 @@ export default function App() {
         <//>
       `}
     <//>
+
+    ${() => {
+      if (habits().length == 0) {
+        return html`
+          <h1 style="text-align: center">No habits found. Let's add some!</h1>
+        `;
+      } else {
+        return html`
+          <div class="view-switcher">
+            <button
+              class=${() => (currentView() == "yearly" ? "active" : "")}
+              onClick=${() => setCurrentView("yearly")}
+            >
+              Yearly
+            </button>
+            <button
+              class=${() => (currentView() == "monthly" ? "active" : "")}
+              onClick=${() => setCurrentView("monthly")}
+            >
+              Monthly
+            </button>
+            <button
+              class=${() => (currentView() == "weekly" ? "active" : "")}
+              onClick=${() => setCurrentView("weekly")}
+            >
+              Weekly
+            </button>
+          </div>
+        `;
+      }
+    }}
   `;
 }
