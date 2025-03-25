@@ -31,6 +31,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 99;
 }
 
 .drawer__backdrop {
@@ -318,12 +319,12 @@ html {
     opacity: 0.5;
 }
 
-.new-habit-form {
+.habit-form {
     width: 80vw;
     padding: 1rem;
 }
 
-.new-habit-form label {
+.habit-form label {
     display: block;
 }
 

@@ -1,5 +1,5 @@
 // db.js
-const DB_NAME = 'HabitTracker';
+const DB_NAME = "HabitTracker";
 const DB_VERSION = 1;
 
 export async function openDB() {
@@ -8,18 +8,20 @@ export async function openDB() {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains('habits')) {
-        db.createObjectStore('habits', {
-          keyPath: 'id',
-          autoIncrement: true
+      if (!db.objectStoreNames.contains("habits")) {
+        db.createObjectStore("habits", {
+          keyPath: "id",
+          autoIncrement: true,
         });
       }
-      if (!db.objectStoreNames.contains('checks')) {
-        const store = db.createObjectStore('checks', {
-          keyPath: 'id',
-          autoIncrement: true
+      if (!db.objectStoreNames.contains("checks")) {
+        const store = db.createObjectStore("checks", {
+          keyPath: "id",
+          autoIncrement: true,
         });
-        store.createIndex('checks_habit_id_date_index', ['habit_id','date'], { unique: true });
+        store.createIndex("checks_habit_id_date_index", ["habit_id", "date"], {
+          unique: true,
+        });
       }
     };
 
@@ -30,7 +32,7 @@ export async function openDB() {
 
 export async function getAll(db, table) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(table, 'readonly');
+    const transaction = db.transaction(table, "readonly");
     const store = transaction.objectStore(table);
     const request = store.getAll();
 
@@ -41,7 +43,7 @@ export async function getAll(db, table) {
 
 export async function getByIndex(db, table, indexName, properties) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(table, 'readonly');
+    const transaction = db.transaction(table, "readonly");
     const store = transaction.objectStore(table);
     const index = store.index(indexName);
     const request = index.openCursor(IDBKeyRange.only(properties));
@@ -62,7 +64,7 @@ export async function getByIndex(db, table, indexName, properties) {
 
 export async function add(db, table, data) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(table, 'readwrite');
+    const transaction = db.transaction(table, "readwrite");
     const store = transaction.objectStore(table);
     const request = store.add(data);
 
@@ -73,11 +75,28 @@ export async function add(db, table, data) {
 
 export async function remove(db, table, id) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(table, 'readwrite');
+    const transaction = db.transaction(table, "readwrite");
     const store = transaction.objectStore(table);
     const request = store.delete(id);
 
     request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+export async function update(db, table, data) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(table, "readwrite");
+    const store = transaction.objectStore(table);
+    const request = store.get(data.id);
+
+    request.onsuccess = () => {
+      data = { ...request.result, ...data };
+      const updateRequest = store.put(data);
+
+      updateRequest.onsuccess = () => resolve(updateRequest.result);
+      updateRequest.onerror = () => reject(updateRequest.error);
+    };
     request.onerror = () => reject(request.error);
   });
 }

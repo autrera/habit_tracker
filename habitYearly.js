@@ -1,15 +1,22 @@
-import { createSignal, createEffect } from "https://esm.sh/solid-js@1.8.1";
+import {
+  createSignal,
+  createEffect,
+  Switch,
+  Match,
+} from "https://esm.sh/solid-js@1.8.1";
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import { getDateRange, groupDatesForYearly, getToday } from "./utilities.js";
 import HabitCheck from "/habitCheck.js";
 import DailyCheck from "/dailyCheck.js";
 import HabitMenu from "/habitMenu.js";
+import HabitForm from "/habitForm.js";
 
 export default function HabitYearly(props) {
   const today = getToday();
   const dateRange = getDateRange(371).reverse();
   const dateMap = groupDatesForYearly(dateRange, 7);
   const [checks, setChecks] = createSignal([]);
+  const [showEditHabit, setShowEditHabit] = createSignal(false);
 
   createEffect(() => {
     const elements = document.getElementsByClassName("habit-yearly__days");
@@ -34,7 +41,13 @@ export default function HabitYearly(props) {
         <div class="habit-yearly__name">
           <span>${props.data.title}</span>
           <${HabitMenu}>
-            <li onClick=${(event) => {}}>Edit</li>
+            <li
+              onClick=${(event) => {
+                setShowEditHabit(true);
+              }}
+            >
+              Edit
+            </li>
             <li class="separator">&nbsp;</li>
             <li
               onClick=${(event) => {
@@ -87,5 +100,17 @@ export default function HabitYearly(props) {
         </div>
       </div>
     </div>
+    <${Switch}>
+      ${() => html`
+        <${Match} when=${showEditHabit() == true}>
+          <${HabitForm}
+            title=${() => props.data.title}
+            color=${() => props.data.color}
+            onClose=${() => setShowEditHabit(false)}
+            onSubmit=${(data) => props.onUpdate(props.data.id, data)}
+          />
+        <//>
+      `}
+    <//>
   `;
 }

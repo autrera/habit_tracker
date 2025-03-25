@@ -5,7 +5,7 @@ import {
   Switch,
   Match,
 } from "https://esm.sh/solid-js@1.8.1";
-import { openDB, getAll, add, remove, getByIndex } from "./db.js";
+import { openDB, getAll, add, remove, getByIndex, update } from "./db.js";
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import HabitWeekly from "./habitWeekly.js";
 import HabitMonthly from "./habitMonthly.js";
@@ -56,6 +56,17 @@ export default function App() {
 
   const handleRemoveHabit = async (id) => {
     await remove(db(), "habits", id);
+    refreshHabits(db());
+  };
+
+  const handleUpdateHabit = async (id, data) => {
+    await update(db(), "habits", {
+      id: id,
+      title: data.title,
+      color: data.color,
+      completed: false,
+    });
+
     refreshHabits(db());
   };
 
@@ -174,6 +185,7 @@ export default function App() {
                     onRemove=${handleRemoveHabit}
                     onCheck=${handleAddCheck}
                     onUncheck=${handleRemoveCheck}
+                    onUpdate=${handleUpdateHabit}
                   />
                 `,
               )}
@@ -222,15 +234,14 @@ export default function App() {
       ${() => html`
         <${Match} when=${showCreateHabit() == true}>
           <${Drawer}
-            onOpen=${() =>
-              document.getElementById("new-habit-form__name").focus()}
+            onOpen=${() => document.getElementById("habit-form__name").focus()}
             onClose=${() => setShowCreateHabit(false)}
           >
-            <div class="new-habit-form">
-              <div class="new-habit-form__input">
-                <label for="new-habit-form__name">Name</label>
+            <div class="habit-form">
+              <div class="habit-form__input">
+                <label for="habit-form__name">Name</label>
                 <input
-                  id="new-habit-form__name"
+                  id="habit-form__name"
                   class="app__input"
                   type="text"
                   value=${() => newHabitTitle()}
@@ -240,10 +251,10 @@ export default function App() {
                   placeholder="Add new habit"
                 />
               </div>
-              <div class="new-habit-form__input">
-                <label for="new-habit-form__color">Color</label>
+              <div class="habit-form__input">
+                <label for="habit-form__color">Color</label>
                 <input
-                  id="new-habit-form__color"
+                  id="habit-form__color"
                   class="app__input"
                   type="text"
                   value=${() => newHabitColor()}
@@ -262,11 +273,6 @@ export default function App() {
               </div>
             </div>
           <//>
-        <//>
-      `}
-      ${() => html`
-        <${Match} when=${showCreateHabit() == false}>
-          <div></div>
         <//>
       `}
     <//>
