@@ -161,26 +161,31 @@ html {
     margin: 0.5rem;
 }
 
-.habit-yearly__name,
+.habit-yearly__header,
 .habit-monthly__name,
 .habit-weekly__name {
     color: #ccc;
     display: flex;
 }
 
-.habit-menu {
-    position: relative;
+.habit-yearly__name {
+    align-self: center;
+    padding-bottom: 0.5rem;
 }
 
-.habit-menu__launcher {
-    color: #ccc;
-    width: 18px;
-    height: 18px;
-    margin: 0 0.5rem;
+.habit-menu-launcher {
+    position: relative;
+    padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
 
-.habit-menu__content {
+.habit-menu-launcher__icon {
+    color: #ccc;
+    width: 18px;
+    height: 18px;
+}
+
+.habit-menu {
     position: absolute;
     background: #ccc;
     border-radius: 4px;
@@ -191,12 +196,12 @@ html {
     padding: 0.5rem 0;
 }
 
-.habit-menu__content li {
+.habit-menu li {
     cursor: pointer;
     padding: 0 1rem;
 }
 
-.habit-menu__content li.separator {
+.habit-menu li.separator {
     cursor: auto;
     margin: 0.5rem 0;
     height: 1px;

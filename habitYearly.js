@@ -38,8 +38,8 @@ export default function HabitYearly(props) {
   return html`
     <div class="habit-yearly__wrapper">
       <div class="habit-yearly">
-        <div class="habit-yearly__name">
-          <span>${props.data.title}</span>
+        <div class="habit-yearly__header">
+          <span class="habit-yearly__name">${props.data.title}</span>
           <${HabitMenu}>
             <li
               onClick=${(event) => {

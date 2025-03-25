@@ -22,12 +22,14 @@ export default function HabitMenu(props) {
   }, [show]);
 
   return html`
-    <div class="habit-menu">
+    <div
+      class="habit-menu-launcher"
+      onClick=${() => {
+        setShow(true);
+      }}
+    >
       <svg
-        onClick=${() => {
-          setShow(true);
-        }}
-        class="habit-menu__launcher"
+        class="habit-menu-launcher__icon"
         viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
@@ -39,7 +41,7 @@ export default function HabitMenu(props) {
       <${Switch}>
         ${() => html`
           <${Match} when=${show() == true}>
-            <ul class="habit-menu__content">
+            <ul class="habit-menu">
               ${() => props.children}
             </ul>
           <//>
