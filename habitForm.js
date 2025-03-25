@@ -45,7 +45,7 @@ export default function HabitForm(props) {
             class="action"
             onClick=${() => props.onSubmit({ title: title(), color: color() })}
           >
-            ${props.title == undefined ? "Add" : "Update"}
+            ${props.title == "" ? "Add" : "Update"}
           </button>
         </div>
       </div>

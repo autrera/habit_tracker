@@ -11,6 +11,7 @@ import HabitWeekly from "./habitWeekly.js";
 import HabitMonthly from "./habitMonthly.js";
 import HabitYearly from "./habitYearly.js";
 import Drawer from "./drawer.js";
+import HabitForm from "./habitForm.js";
 
 export default function App() {
   const [habits, setHabits] = createSignal([]);
@@ -39,12 +40,12 @@ export default function App() {
     setChecks(items);
   };
 
-  const handleAddHabit = async () => {
-    if (!newHabitTitle().trim() || !db()) return;
+  const handleAddHabit = async (data) => {
+    if (!data.title.trim() || !db()) return;
 
     await add(db(), "habits", {
-      title: newHabitTitle(),
-      color: newHabitColor(),
+      title: data.title,
+      color: data.color,
       completed: false,
     });
 
@@ -202,46 +203,12 @@ export default function App() {
     <${Switch}>
       ${() => html`
         <${Match} when=${showCreateHabit() == true}>
-          <${Drawer}
-            onOpen=${() => document.getElementById("habit-form__name").focus()}
+          <${HabitForm}
+            title=${() => newHabitTitle()}
+            color=${() => newHabitColor()}
             onClose=${() => setShowCreateHabit(false)}
-          >
-            <div class="habit-form">
-              <div class="habit-form__input">
-                <label for="habit-form__name">Name</label>
-                <input
-                  id="habit-form__name"
-                  class="app__input"
-                  type="text"
-                  value=${() => newHabitTitle()}
-                  onInput=${(e) => {
-                    setNewHabitTitle(e.currentTarget.value);
-                  }}
-                  placeholder="Add new habit"
-                />
-              </div>
-              <div class="habit-form__input">
-                <label for="habit-form__color">Color</label>
-                <input
-                  id="habit-form__color"
-                  class="app__input"
-                  type="text"
-                  value=${() => newHabitColor()}
-                  onInput=${(e) => {
-                    setNewHabitColor(e.currentTarget.value);
-                  }}
-                  placeholder="Add new habit color"
-                />
-              </div>
-              <div style="text-align: right">
-                <button onClick=${() => setShowCreateHabit(false)}>
-                  Close
-                </button>
-                &nbsp;
-                <button class="action" onClick=${handleAddHabit}>Add</button>
-              </div>
-            </div>
-          <//>
+            onSubmit=${(data) => handleAddHabit(data)}
+          />
         <//>
       `}
     <//>
