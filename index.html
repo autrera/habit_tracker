@@ -1,18 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>Habit Tracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <script type="module">
-      import { render } from "https://esm.sh/solid-js@1.8.1/web";
-      import App from './app.js';
+    <head>
+        <title>Habit Tracker</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" href="normalize.css" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <script type="module">
+            import { render } from "https://esm.sh/solid-js@1.8.1/web";
+            import App from "./app.js";
 
-      render(App, document.getElementById('app'));
-    </script>
-    <div id="app"></div>
-  </body>
+            render(App, document.getElementById("app"));
+        </script>
+        <div id="app"></div>
+    </body>
 </html>
