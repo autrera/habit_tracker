@@ -1,14 +1,22 @@
-import { createSignal, createEffect } from "https://esm.sh/solid-js@1.8.1";
+import {
+  createSignal,
+  createEffect,
+  Switch,
+  Match,
+} from "https://esm.sh/solid-js@1.8.1";
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import { getDateRange, groupDatesForDisplay, getToday } from "./utilities.js";
 import HabitCheck from "/habitCheck.js";
 import DailyCheck from "/dailyCheck.js";
+import HabitMenu from "/habitMenu.js";
+import HabitForm from "/habitForm.js";
 
 export default function HabitWeekly(props) {
   const today = getToday();
   const dateRange = getDateRange(7).reverse();
   const dateMap = groupDatesForDisplay(dateRange, 7);
   const [checks, setChecks] = createSignal([]);
+  const [showEditHabit, setShowEditHabit] = createSignal(false);
 
   createEffect(() => {
     const elements = document.getElementsByClassName("habit-weekly__days");
@@ -30,9 +38,27 @@ export default function HabitWeekly(props) {
   return html`
     <div class="habit-weekly__wrapper">
       <div class="habit-weekly">
-        <div class="habit-weekly__name">
-          ${props.data.title}
-          <a onClick=${() => props.onRemove(props.data.id)}>[ X ]</a>
+        <div class="habit-weekly__header">
+          <span class="habit-weekly__name">${props.data.title}</span>
+          <${HabitMenu}>
+            <li
+              onClick=${(event) => {
+                setShowEditHabit(true);
+              }}
+            >
+              Edit
+            </li>
+            <li class="separator">&nbsp;</li>
+            <li
+              onClick=${(event) => {
+                if (confirm("Do you want to archive the habit?") == true) {
+                  props.onRemove(props.data.id);
+                }
+              }}
+            >
+              Archive
+            </li>
+          <//>
           <div class="pusher">&nbsp;</div>
           ${() => html`
             <${DailyCheck}
@@ -51,20 +77,22 @@ export default function HabitWeekly(props) {
               dateMap.map(
                 (group) => html`
                   <tr>
-                    ${group.map(
-                      (date) => html`
-                        <td>
-                          <${HabitCheck}
-                            date=${date}
-                            color=${() => props.data.color}
-                            checked=${checks().includes(date)}
-                            onCheck=${() => props.onCheck(date, props.data.id)}
-                            onUncheck=${() =>
-                              props.onUncheck(date, props.data.id)}
-                          />
-                        </td>
-                      `,
-                    )}
+                    ${() =>
+                      group.map(
+                        (date) => html`
+                          <td>
+                            <${HabitCheck}
+                              date=${date}
+                              color=${() => props.data.color}
+                              checked=${checks().includes(date)}
+                              onCheck=${() =>
+                                props.onCheck(date, props.data.id)}
+                              onUncheck=${() =>
+                                props.onUncheck(date, props.data.id)}
+                            />
+                          </td>
+                        `,
+                      )}
                   </tr>
                 `,
               )}
@@ -72,5 +100,17 @@ export default function HabitWeekly(props) {
         </div>
       </div>
     </div>
+    <${Switch}>
+      ${() => html`
+        <${Match} when=${showEditHabit() == true}>
+          <${HabitForm}
+            title=${() => props.data.title}
+            color=${() => props.data.color}
+            onClose=${() => setShowEditHabit(false)}
+            onSubmit=${(data) => props.onUpdate(props.data.id, data)}
+          />
+        <//>
+      `}
+    <//>
   `;
 }

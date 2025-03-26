@@ -162,13 +162,15 @@ html {
 }
 
 .habit-yearly__header,
-.habit-monthly__name,
-.habit-weekly__name {
+.habit-monthly__header,
+.habit-weekly__header {
     color: #ccc;
     display: flex;
 }
 
-.habit-yearly__name {
+.habit-yearly__name,
+.habit-monthly__name,
+.habit-weekly__name {
     align-self: center;
     padding-bottom: 0.5rem;
 }
@@ -217,8 +219,9 @@ html {
 
 .habit-yearly__days {
     max-width: 100%;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
+    scrollbar-width: none;
 }
 
 .habit-yearly__days table,
