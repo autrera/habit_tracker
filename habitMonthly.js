@@ -39,7 +39,9 @@ export default function HabitMonthly(props) {
     <div class="habit-monthly__wrapper">
       <div class="habit-monthly">
         <div class="habit-monthly__header">
-          <span class="habit-monthly__name">${props.data.title}</span>
+          <span class="habit-monthly__name" title=${props.data.title}
+            >${props.data.title}</span
+          >
           <${HabitMenu}>
             <li
               onClick=${(event) => {

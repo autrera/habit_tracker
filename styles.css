@@ -173,6 +173,9 @@ html {
 .habit-weekly__name {
     align-self: center;
     padding-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
 }
 
 .habit-menu-launcher {
