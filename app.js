@@ -174,6 +174,7 @@ export default function App() {
                     onRemove=${handleRemoveHabit}
                     onCheck=${handleAddCheck}
                     onUncheck=${handleRemoveCheck}
+                    onUpdate=${handleUpdateHabit}
                   />
                 `,
               )}
@@ -192,6 +193,7 @@ export default function App() {
                     onRemove=${handleRemoveHabit}
                     onCheck=${handleAddCheck}
                     onUncheck=${handleRemoveCheck}
+                    onUpdate=${handleUpdateHabit}
                   />
                 `,
               )}
