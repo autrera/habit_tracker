@@ -12,6 +12,7 @@ import HabitMonthly from "./habitMonthly.js";
 import HabitYearly from "./habitYearly.js";
 import Drawer from "./drawer.js";
 import HabitForm from "./habitForm.js";
+import { isLocalStorageAvailable } from "./utilities.js";
 
 export default function App() {
   const [habits, setHabits] = createSignal([]);
@@ -20,7 +21,7 @@ export default function App() {
   const [newHabitTitle, setNewHabitTitle] = createSignal("");
   const [newHabitColor, setNewHabitColor] = createSignal("");
   const [showCreateHabit, setShowCreateHabit] = createSignal(false);
-  const [currentView, setCurrentView] = createSignal("yearly");
+  const [currentView, setCurrentView] = createSignal("");
 
   onMount(async () => {
     const database = await openDB();
@@ -28,6 +29,11 @@ export default function App() {
     refreshHabits(database);
     refreshChecks(database);
     setEscapeListener();
+
+    if (isLocalStorageAvailable()) {
+      const storedView = localStorage.getItem("currentView") || "weekly";
+      setCurrentView(storedView);
+    }
   });
 
   const refreshHabits = async (database) => {
@@ -98,6 +104,13 @@ export default function App() {
         setShowCreateHabit(false);
       }
     };
+  };
+
+  const updateCurrentView = (view) => {
+    if (isLocalStorageAvailable()) {
+      localStorage.setItem("currentView", view);
+    }
+    setCurrentView(view);
   };
 
   return html`
@@ -224,22 +237,22 @@ export default function App() {
         return html`
           <div class="view-switcher">
             <button
-              class=${() => (currentView() == "yearly" ? "active" : "")}
-              onClick=${() => setCurrentView("yearly")}
+              class=${() => (currentView() == "weekly" ? "active" : "")}
+              onClick=${() => updateCurrentView("weekly")}
             >
-              Yearly
+              Weekly
             </button>
             <button
               class=${() => (currentView() == "monthly" ? "active" : "")}
-              onClick=${() => setCurrentView("monthly")}
+              onClick=${() => updateCurrentView("monthly")}
             >
               Monthly
             </button>
             <button
-              class=${() => (currentView() == "weekly" ? "active" : "")}
-              onClick=${() => setCurrentView("weekly")}
+              class=${() => (currentView() == "yearly" ? "active" : "")}
+              onClick=${() => updateCurrentView("yearly")}
             >
-              Weekly
+              Yearly
             </button>
           </div>
         `;
