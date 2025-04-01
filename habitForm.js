@@ -1,6 +1,7 @@
 import { createSignal, createEffect } from "https://esm.sh/solid-js@1.8.1";
 import html from "https://esm.sh/solid-js@1.8.1/html";
 import Drawer from "/drawer.js";
+import HabitColors from "/habitColors.js";
 
 export default function HabitForm(props) {
   const [title, setTitle] = createSignal(props.title);
@@ -27,15 +28,9 @@ export default function HabitForm(props) {
         </div>
         <div class="habit-form__input">
           <label for="habit-form__color">Color</label>
-          <input
-            id="habit-form__color"
-            class="app__input"
-            type="text"
-            value=${() => color()}
-            onInput=${(e) => {
-              setColor(e.currentTarget.value);
-            }}
-            placeholder="Add new habit color"
+          <${HabitColors}
+            currentColor=${() => color()}
+            onChange=${(color) => setColor(color)}
           />
         </div>
         <div style="text-align: right">
