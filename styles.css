@@ -145,7 +145,6 @@ html {
 .habit-monthly__wrapper {
     flex: 0 0 auto;
     width: 50%;
-    /* width: 33.33333333%; */
 }
 
 .habit-yearly__wrapper {
@@ -383,4 +382,33 @@ html {
     border-color: #86b7fe;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+@media (max-width: 375px) {
+    .habit-yearly__days table {
+        border-spacing: 3px;
+    }
+
+    .habit-monthly__days table,
+    .habit-weekly__days table {
+        border-spacing: 2px;
+    }
+}
+
+@media (min-width: 768px) {
+    /* styles for desktops */
+    .habit-form {
+        width: 40vw;
+    }
+
+    .habit-weekly__wrapper,
+    .habit-monthly__wrapper {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    .habit-yearly__wrapper {
+        flex: 0 0 auto;
+        width: 50%;
+    }
 }
