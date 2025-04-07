@@ -8,7 +8,7 @@ import HabitForm from "/habitForm.js";
 
 export default function HabitYearly(props) {
   const today = getToday();
-  const dateRange = getDateRange(371).reverse();
+  const dateRange = getDateRange(203).reverse();
   const dateMap = groupDatesForYearly(dateRange, 7);
   const [checks, setChecks] = createSignal([]);
   const [showEditHabit, setShowEditHabit] = createSignal(false);
