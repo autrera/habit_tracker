@@ -1,12 +1,7 @@
 // app.js
-import {
-  createSignal,
-  onMount,
-  Switch,
-  Match,
-} from "https://esm.sh/solid-js@1.8.1";
+import { createSignal, onMount, Switch, Match } from "./solid/solid.js";
 import { openDB, getAll, add, remove, getByIndex, update } from "./db.js";
-import html from "https://esm.sh/solid-js@1.8.1/html";
+import html from "./solid/html.js";
 import HabitWeekly from "./habitWeekly.js";
 import HabitMonthly from "./habitMonthly.js";
 import HabitYearly from "./habitYearly.js";

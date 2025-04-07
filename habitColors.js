@@ -1,5 +1,5 @@
-import { createSignal, createEffect } from "https://esm.sh/solid-js@1.8.1";
-import html from "https://esm.sh/solid-js@1.8.1/html";
+import { createSignal, createEffect } from "./solid/solid.js";
+import html from "./solid/html.js";
 import colors from "./colors.js";
 
 export default function HabitColors(props) {

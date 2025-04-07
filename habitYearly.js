@@ -1,10 +1,5 @@
-import {
-  createSignal,
-  createEffect,
-  Switch,
-  Match,
-} from "https://esm.sh/solid-js@1.8.1";
-import html from "https://esm.sh/solid-js@1.8.1/html";
+import { createSignal, createEffect, Switch, Match } from "./solid/solid.js";
+import html from "./solid/html.js";
 import { getDateRange, groupDatesForYearly, getToday } from "./utilities.js";
 import HabitCheck from "/habitCheck.js";
 import DailyCheck from "/dailyCheck.js";
